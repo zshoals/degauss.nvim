@@ -33,6 +33,9 @@
 -- 			Fireworks (self-explanatory)
 -- 			Auras (circular rotating rings, or pulsing areas of effect)
 -- 			Point pulses (slow expanding aoes)
+-- 			Burning fuse (takes a long time?
+-- 			Snake?
+-- 			DVD bouncer (With "Degauss" as the text)
 local M = {}
 
 local fg_ctx = {
@@ -59,9 +62,9 @@ local fg_ctx = {
 		process = false,
 		recur_frequency = 1500,
 		recur_timer = 0,
-		max_dist = 6,
+		max_dist = 12,
 		cur_dist = 0,
-		spread_refire_threshold = 24,
+		spread_refire_threshold = 8,
 		spread_refire_current_time = 0,
 	},
 }
@@ -123,7 +126,7 @@ local function pulse_try(x, y, update_time_ms)
 				pulse_step_cell()
 
 
-				local blend_start = 60
+				local blend_start = 0
 				M.cell_create(
 					x - p.cur_dist + 1,
 					y,
@@ -132,7 +135,7 @@ local function pulse_try(x, y, update_time_ms)
 					0,
 					0,
 					1000,
-					60,
+					blend_start,
 					100
 				)
 
@@ -144,7 +147,7 @@ local function pulse_try(x, y, update_time_ms)
 					0,
 					0,
 					1000,
-					60,
+					blend_start,
 					100
 				)
 			end
